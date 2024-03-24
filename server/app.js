@@ -9,9 +9,10 @@ const app = express();
 const adminRoutes = require("./routes/admin");
 app.use(
   cors({
+    
     credentials: true,
     methods: ["GET", "POST", "OPTIONS"],
-    origin: ["http://localhost:5173", "", "http://triecleaningg.chttps://triecleaningg.comom"],
+    origin: [ "https://triecleaningg.com", "http://triecleaningg.com"],
   })
 );
 
