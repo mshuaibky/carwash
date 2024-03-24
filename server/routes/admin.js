@@ -19,7 +19,9 @@ const {addPendingList,getAllLists
     getSearchData,
     addNewList,
     getNewListData,
-    downloadDataNewList
+    downloadDataNewList,
+    getAdminList,
+    dwnldAdminList
 } = require('../controller/adminController')
 
 router.post('/pendingList',addPendingList)
@@ -38,5 +40,6 @@ router.post('/searchTerm',getSearchData)
 router.post('/newList',addNewList)
 router.get('/newListData',getNewListData)
 router.get('/downloadNewListData',downloadDataNewList)
-
+router.get('/getadminNewList',getAdminList)
+router.get('/dwnloadAdminNewList',dwnldAdminList)
 module.exports= router

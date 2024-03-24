@@ -17,6 +17,10 @@ const menuItems = [
     name: ' Employees',
     href: '/employees',
   },
+  {
+    name: ' New List ',
+    href: '/adminNewList',
+  },
  
 ]
 

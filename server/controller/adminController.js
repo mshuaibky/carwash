@@ -437,8 +437,14 @@ exports.loginAdmin=async(req,res)=>{
  }
  //getting new List
  exports.getNewListData =async (req,res)=>{
+    console.log(req.query,'back');
 try {
-    const data = await NewList.find({})
+    const employee = req.query.data
+
+    const emp = await  Employee.find({name:employee})
+    console.log(emp,'kdk');
+    const empData = emp[0]?.site
+    const data = await NewList.find({site:empData})
     console.log(data,'new lsit data');
     if(data){
         res.status(200).send(data)
@@ -523,3 +529,92 @@ try {
   
     console.log('Excel file sent successfully');
   }
+  
+  //get admin list
+ exports.getAdminList =async(req,res)=>{
+    try {
+        const data = await NewList.find({})
+        console.log(data,'new lsit data');
+        if(data){
+            res.status(200).send(data)
+        }
+    } catch (error) {
+       res.send(error) 
+    }
+ }
+
+ exports.dwnldAdminList = async(req,res)=>{
+    try {
+        const allData =await NewList.find({})
+        if(allData){
+            exportToExcelAndSendResponse(allData,res)
+        }
+    } catch (error) {
+        
+    }
+ }
+ async function exportToExcelAndSendResponse(data, res) {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Sheet 1');
+    worksheet.columns = [
+      { header: 'Serial No', key: 'serialNo', width: 15 },
+      { header: 'Name', key: 'name', width: 15 },
+
+      { header: 'Mobile ', key: 'mobile', width: 15 },
+      { header: 'Building', key: 'building', width: 15 },
+      { header: 'Plate No', key: 'PlateNo', width: 15 },
+
+      { header: 'Flat  ', key: 'flat', width: 15 },
+      { header: 'Lot Number', key: 'lotnumber', width: 15 },
+      { header: 'payment Method', key: 'paymentMethod', width: 15 },
+
+      { header: 'AuthCode', key: 'authcode', width: 15 },
+      { header: 'Amount ', key: 'amount', width: 15 },
+      { header: 'Renewal Date ', key: 'renewaldate', width: 15 },
+      { header: 'Schedule ', key: 'schedule', width: 16 },
+      { header: 'Cleaner ', key: 'cleaner', width: 17 },
+      { header: 'Site ', key: 'site', width: 17 },
+
+      { header: 'Date ', key: 'date', width: 18 },
+
+
+
+
+    ];
+  
+    data.forEach((item) => {
+        console.log(item,'ietmss');
+      worksheet.addRow({
+        serialNo: item.serialNo,
+        name:item.name,
+        mobile: item.mobile,
+        building: item.building,
+        PlateNo:item.plateNo,
+        flat: item.flat,
+        lotnumber: item.lotnumber,
+        paymentMethod: item.paymentMethod,
+
+        authcode: item.authCode,
+        amount: item.amount,
+        renewaldate : item.renewaldate,
+        schedule : item.schedule,
+        cleaner : item.cleaner,
+        site : item.site,
+        date : item.date,
+
+
+
+      });
+    });
+  
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition', 'attachment; filename=output.xlsx');
+  
+   await  workbook.xlsx.write(res);
+  
+   
+    res.end();
+    
+  
+    console.log('Excel file sent successfully');
+ }

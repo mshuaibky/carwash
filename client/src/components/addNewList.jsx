@@ -5,6 +5,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
 function AddNewList() {
+
   const Navigate = useNavigate()
   const [selectedValue, setSelectedValue] = useState('cash');
 
@@ -103,6 +104,8 @@ function AddNewList() {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async values => {
+      values.site = values.site.toUpperCase();
+
       const selectedDays = document.querySelectorAll('input[name="day"]:checked');
       const daysOfWeek = Array.from(selectedDays).map(checkbox => checkbox.value);
       const updatedValues = {
@@ -332,13 +335,13 @@ function AddNewList() {
                   </div>
                   <div>
                     <label htmlFor="balance" className="block text-gray-700 font-bold mb-2">Schedule</label>
-     <label className='m-3' ><input  type="checkbox" name="day" value="Monday"/> Mon</label>
-    <label className='m-3'><input type="checkbox" name="day" value="Tuesday"/> Tue</label>
-    <label className='m-3'><input type="checkbox" name="day" value="Wednesday"/> Wedn</label>
-    <label className='m-3'><input type="checkbox" name="day" value="Thursday"/> Thu</label>
-    <label className='m-3'><input type="checkbox" name="day" value="Friday"/> Fri</label>
-    <label className='m-3'><input type="checkbox" name="day" value="Saturday"/> Sat</label>
-    <label className='m-3'><input type="checkbox" name="day" value="Sunday"/> Sun</label>
+     <label className='m-3' ><input  type="checkbox" name="day" value="Mon"/> Mon</label>
+    <label className='m-3'><input type="checkbox" name="day" value="Tue"/> Tue</label>
+    <label className='m-3'><input type="checkbox" name="day" value="Wed"/> Wedn</label>
+    <label className='m-3'><input type="checkbox" name="day" value="Thu"/> Thu</label>
+    <label className='m-3'><input type="checkbox" name="day" value="Fri"/> Fri</label>
+    <label className='m-3'><input type="checkbox" name="day" value="Sat"/> Sat</label>
+    <label className='m-3'><input type="checkbox" name="day" value="Sun "/> Sun</label>
                   </div>
                   <div>
                     <label htmlFor="balance" className="block text-gray-700 font-bold mb-2">Cleaner</label>
@@ -361,8 +364,8 @@ function AddNewList() {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.site}
-                      className="w-full rounded-lg border border-gray-500 p-3 text-sm"
-
+                      className="w-full rounded-lg border border-gray-500 p-3 text-sm "
+                
                       placeholder="Cleaner Name "
                       type="text"
                       id="phone"

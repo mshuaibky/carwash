@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import{useNavigate,Link} from 'react-router-dom'
-import{getnewList,downloadNewListData} from '../helpers/adminHelpers'
+import{getAdminNewList,downloadAdminNewListData} from '../helpers/adminHelpers'
 
-
-function ShowNewList() {
-  const emp =sessionStorage.getItem('emp');
-
-    const [newList,setNewList]= useState([])
+function AdminNewList() {
+    const [adminList,setAdminList] = useState([])
     useEffect(()=>{
-        getnewList(emp).then((data)=>{
-            setNewList(data?.data)
-        })
+      getAdminNewList().then((Data)=>{
+        setAdminList(Data?.data)
+        console.log(Data,'frontEnd');
+      })
     },[])
   return (
     <div>
+         <div>
        <section className="mx-auto w-full max-w-7xl px-4 py-4">
     <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
       <div>
-        <h2 className="text-lg font-semibold">Emp New List</h2>
+        <h2 className="text-lg font-semibold">Admin New List</h2>
        
       </div>
       <div>
             <Link 
-            onClick={downloadNewListData}
+            onClick={downloadAdminNewListData}
               type="button"
               className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
             >
@@ -131,7 +130,7 @@ function ShowNewList() {
                 </tr>
               </thead>
               {
-                newList?.map((data,key)=>{
+                adminList?.map((data,key)=>{
                     console.log(data,',,,,');
                     // const date = new Date(data.newDate);
 
@@ -225,7 +224,8 @@ function ShowNewList() {
     </div>
   </section>  
     </div>
+    </div>
   )
 }
 
-export default ShowNewList
+export default AdminNewList

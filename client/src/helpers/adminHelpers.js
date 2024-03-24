@@ -169,7 +169,6 @@ adminApi.post('/empLogin',data).then((res)=>{
 //getEmplPendingList
 
 export async function getEmplPendingList(currentPage, pageSize,data) {
-    console.log('calling');
     try {
       const response = await adminApi.get('/getEmplPendingList', {
         params: {
@@ -214,9 +213,14 @@ export async function newList(data){
     })
 }
 //get new List
-export async function getnewList(){
+export async function getnewList(data){
+
     return new Promise((resolve,reject)=>{
-        adminApi.get('/newListData').then((data)=>{
+        adminApi.get('/newListData',{
+            params:{
+                data:data
+            },
+        }).then((data)=>{
             console.log(data,'axios data');
             if(data){
                 resolve(data)
@@ -230,6 +234,43 @@ export async function getnewList(){
 export async function downloadNewListData(){
     return new Promise((resolve,reject)=>{
         adminApi.get('/downloadNewListData', { responseType: 'arraybuffer' }).then((data,response)=>{
+            console.log(data,'dlfjlkdj');
+            if(data){
+
+                const blob = new Blob([data.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+
+                // Create a link element to trigger the download
+                const link = document.createElement('a');
+                
+                link.href = window.URL.createObjectURL(blob);
+                link.download = 'renewed_data.xlsx'; // Set the desired file name
+                link.click();
+              
+            }
+            else {
+                console.error('Failed to download data:', response.statusText);
+              }
+          
+        }).catch((error)=>{
+            reject(error)
+        })
+    })
+}
+//getAdminNewList
+
+export async function getAdminNewList(){
+    return new Promise((resolve,reject)=>{
+        adminApi.get('/getadminNewList').then((data)=>{
+            resolve(data)
+        }).catch((error)=>{
+            reject(error)
+        })
+    })
+}
+
+export async function downloadAdminNewListData(){
+    return new Promise((resolve,reject)=>{
+        adminApi.get('/dwnloadAdminNewList', { responseType: 'arraybuffer' }).then((data,response)=>{
             console.log(data,'dlfjlkdj');
             if(data){
 

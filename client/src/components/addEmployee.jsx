@@ -36,6 +36,8 @@ function AddEmployee() {
         validateOnBlur: false,
         validateOnChange: false,
         onSubmit: async values => {
+      values.site = values.site.toUpperCase();
+
           console.log(values, 'namma values');
           let details = addEmp(values)
           toast.promise(details, {
