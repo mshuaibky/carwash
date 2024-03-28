@@ -12,7 +12,7 @@ app.use(
     
     credentials: true,
     methods: ["GET", "POST", "OPTIONS"],
-    origin: [ "https://triecleaningg.com", "http://triecleaningg.com"],
+    origin: [ "http://localhost:5173","https://triecleaningg.com", "http://triecleaningg.com"],
   })
 );
 

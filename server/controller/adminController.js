@@ -418,14 +418,47 @@ exports.loginAdmin=async(req,res)=>{
         res.send(error)
     }
  }
+
+
+
  exports.addNewList=async(req,res)=>{
   console.log(req.body,'namma body backend');
-  const {serialNo,name,mobile,building,plateNo,flat,lotnumber,paymentMethod,authcode,amount,
+  let datenew={}
+  const {serialNo,name,mobile,building,plateNo,flat,lotnumber,paymentMethod,authcode,amount,site,
     renewaldate,schedule,cleaner,date
 
 }=req.body
-    const newList = new  NewList(req.body)
+  const originalDate = req.body.renewaldate;
+  const dateParts = originalDate.split('-');
+  if (dateParts.length === 3) {
+    const [year, month, day] = dateParts;
+    const formattedDate = `${day}-${month}-${year.slice(2)}`;
+    
+   datenew = formattedDate
+  } else {
+    console.log("Invalid date format.");
+  }
+ 
+  console.log(datenew,'eheeee');
+    const newList = new  NewList({
+        serialNo,
+        name,
+        mobile,
+        building,
+        plateNo,
+        flat,
+        lotnumber,
+        paymentMethod,
+        authcode,
+        amount,
+       renewaldate:datenew,
+       site,
+    schedule,
+    cleaner,
+    date
+    })
     newList.save().then((response)=>{
+        console.log(response,'jiui');
       if(response){
         console.log(response,'saved succesfully');
           res.status(200).send({success:true})
@@ -437,15 +470,12 @@ exports.loginAdmin=async(req,res)=>{
  }
  //getting new List
  exports.getNewListData =async (req,res)=>{
-    console.log(req.query,'back');
 try {
     const employee = req.query.data
 
     const emp = await  Employee.find({name:employee})
-    console.log(emp,'kdk');
     const empData = emp[0]?.site
     const data = await NewList.find({site:empData})
-    console.log(data,'new lsit data');
     if(data){
         res.status(200).send(data)
     }

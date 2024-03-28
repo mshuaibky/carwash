@@ -33,31 +33,23 @@ function AddNewList() {
     else if (!values.building) {
       errors.building = toast.error('building No is required')
     }
-    else if (!values.building.match(/^\d+/)) {
-      errors.building = toast.error('Enter a valid building No')
-    }
+   
     //plate no
     else if (!values.plateNo) {
       errors.plateNo = toast.error('Plate no is required')
     }
-    else if (!values.plateNo.match(/^\d+/)) {
-      errors.plateNo = toast.error('Enter a valid Platle No')
-    }
+    
     //flat
     else if (!values.flat.match(/^\d+/)) {
       errors.flat = toast.error('Flat no is required')
     }
 
-    else if (!values.flat.match(/^\d+/)) {
-      errors.flat = toast.error('Enter a valid Flat No')
-    }
+   
     //lot number
     else if (!values.lotnumber) {
       errors.lotnumber = toast.error('lotnumber is required')
     }
-    else if (!values.lotnumber.match(/^\d+/)) {
-      errors.lotnumber = toast.error('Enter a valid Lot No')
-    }
+   
 
     //amount
     else if (!values.amount) {
@@ -66,7 +58,15 @@ function AddNewList() {
     else if (!values.amount.match(/^\d+/)) {
       errors.amount = toast.error('Enter amount')
     }
+//auth code
 
+else if(!values.authcode&&values.paymentMethod==='card'){
+  errors.authcode = toast.error('Auth code cant be embpty')
+}
+//renewal date
+else if(!values.renewaldate){
+  errors.renewaldate = toast.error('provide renewal date')
+}
     return errors
   }
 
@@ -76,6 +76,7 @@ function AddNewList() {
   const year = today.getFullYear();
 
   const formattedDate = `${day}-${month}-${year}`;
+  console.log(formattedDate,'formatted date');
   const Change = (event) => {
     setSelectedValue(event.target.value);
 
@@ -110,7 +111,7 @@ function AddNewList() {
       const daysOfWeek = Array.from(selectedDays).map(checkbox => checkbox.value);
       const updatedValues = {
         ...values,
-        schedule: daysOfWeek.join(','), // Convert array to comma-separated string
+        schedule: daysOfWeek.join(','),
       };
     
       console.log(updatedValues, 'namma values');
@@ -291,6 +292,8 @@ function AddNewList() {
                     </select>
 
                   </div>
+                  {
+                    selectedValue==='card'?
                   <div>
                     <label htmlFor="balance" className="block text-gray-700 font-bold mb-2">Auth Code</label>
                     <input
@@ -303,7 +306,8 @@ function AddNewList() {
                       type="text"
                       id="balance"
                     />
-                  </div>
+                  </div>:""
+                  }
                   <div>
                     <label htmlFor="balance" className="block text-gray-700 font-bold mb-2">Amount</label>
                     <input
@@ -385,20 +389,7 @@ function AddNewList() {
                       id="phone"
                     />
                   </div>
-                  <div>
-                    <label htmlFor="balance" className="block text-gray-700 font-bold mb-2">Instance Id</label>
-                    <input
-                      name='instanceid'
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.instanceid}
-                      className="w-full rounded-lg border border-gray-500 p-3 text-sm"
-
-                      placeholder="Cleaner Name "
-                      type="text"
-                      id="phone"
-                    />
-                  </div>
+            
                 </div>
 
 
