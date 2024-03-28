@@ -5,7 +5,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
 function AddNewList() {
-
+  const todayDate = new Date().toISOString().split('T')[0]
   const Navigate = useNavigate()
   const [selectedValue, setSelectedValue] = useState('cash');
 
@@ -302,7 +302,7 @@ else if(!values.renewaldate){
                       onBlur={formik.handleBlur}
                       value={formik.values.authcode}
                       className="w-full rounded-lg border border-gray-500 p-3 text-sm"
-                      placeholder="Balance"
+                      placeholder="Auth code"
                       type="text"
                       id="balance"
                     />
@@ -331,9 +331,9 @@ else if(!values.renewaldate){
                       onBlur={formik.handleBlur}
                       value={formik.values.renewaldate}
                       className="w-full rounded-lg border border-gray-500 p-3 text-sm"
-
                       placeholder="Cleaner Name "
                       type="date"
+                      min={todayDate}
                       id="phone"
                     />
                   </div>

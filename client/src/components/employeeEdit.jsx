@@ -213,7 +213,7 @@ function EmployeeEdit() {
 
         placeholder=" New Date"
         type="date"
-        min={today}  // Set the min attribute to today's date
+        min={today} 
       />
     </div>
             </div>
