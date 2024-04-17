@@ -18,7 +18,7 @@ function EmpRenewedPage() {
         <h2 className="text-lg font-semibold">Renewed List</h2>
        
       </div>
-      <div>
+      {/* <div>
             <Link 
             onClick={downloadData}
               type="button"
@@ -26,7 +26,7 @@ function EmpRenewedPage() {
             >
              Download
             </Link>
-          </div>
+          </div> */}
     </div>
     <div className="mt-6 flex flex-col">
       <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
