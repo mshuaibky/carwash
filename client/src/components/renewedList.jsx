@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import{getrenewedList,downloadData} from '../helpers/adminHelpers'
+import{getrenewedList,admindownloadData} from '../helpers/adminHelpers'
 import { Link } from 'react-router-dom'
 
 function RenewedList() {
@@ -21,7 +21,7 @@ function RenewedList() {
       </div>
       <div>
             <Link 
-            onClick={downloadData}
+            onClick={admindownloadData}
               type="button"
               className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
             >

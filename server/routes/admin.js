@@ -9,7 +9,7 @@ const {addPendingList,getAllLists
     ,editList,
     getSingleData,
     getallRenewedList,
-    downloadReneiwedData,
+    downloadadminReneiwedData,
     exportFormData,
     loginAdmin,
     addEmployee,
@@ -29,7 +29,7 @@ router.get('/getPendingList',getAllLists)
 router.get('/getListById:id',getSingleData)
 router.post('/editList',editList)
 router.get('/renewedList',getallRenewedList)
-router.get('/downloadData',downloadReneiwedData)
+router.get('/admindownloadData',downloadadminReneiwedData)
 router.post('/exportList',upload.single('excelFile'),exportFormData)
 router.post('/loginAdmin',loginAdmin)
 router.post('/addEmployees',addEmployee)

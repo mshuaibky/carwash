@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import{getrenewedList,downloadData} from '../helpers/adminHelpers'
+import{getrenewedList} from '../helpers/adminHelpers'
 import { Link } from 'react-router-dom'
 
 function EmpRenewedPage() {
@@ -18,15 +18,7 @@ function EmpRenewedPage() {
         <h2 className="text-lg font-semibold">Renewed List</h2>
        
       </div>
-      {/* <div>
-            <Link 
-            onClick={downloadData}
-              type="button"
-              className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-            >
-             Download
-            </Link>
-          </div> */}
+    
     </div>
     <div className="mt-6 flex flex-col">
       <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

@@ -73,10 +73,10 @@ return new Promise((resolve,reject)=>{
     })
 })
 }
-
-export async function downloadData(){
+//emp
+export async function admindownloadData(){
     return new Promise((resolve,reject)=>{
-        adminApi.get('/downloadData', { responseType: 'arraybuffer' }).then((data,response)=>{
+        adminApi.get('/admindownloadData', { responseType: 'arraybuffer' }).then((data,response)=>{
             console.log(data,'dlfjlkdj');
             if(data){
 

@@ -1,6 +1,7 @@
 const PendingList= require('../model/pendingListModel')
 const RenewedList = require('../model/renewedList')
 const ExcelJS = require('exceljs');
+const ExcelJS2 = require('exceljs')
 const Admin = require('../model/admin')
 const Employee = require('../model/employee')
 const bcrypt = require('bcrypt')
@@ -149,9 +150,10 @@ exports.getallRenewedList= async(req,res)=>{
     }
 }
 
-exports.downloadReneiwedData = async(req,res)=>{
+exports.downloadadminReneiwedData = async(req,res)=>{
     try {
         const allData =await RenewedList.find({})
+        console.log(allData,';;;;;;');
         if(allData){
             exportToExcelAndSendResponse(allData,res)
         }
@@ -161,41 +163,19 @@ exports.downloadReneiwedData = async(req,res)=>{
     }
 }
 async function exportToExcelAndSendResponse(data, res) {
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Sheet 1');
-    worksheet.columns = [
+    console.log(data ,'download');
+    const workbook2 = new ExcelJS2.Workbook();
+    const worksheet2 = workbook2.addWorksheet('Sheet 1');
+    worksheet2.columns = [
       { header: 'Contract No', key: 'contractNo', width: 15 },
-      { header: 'Serial No', key: 'serialNo', width: 15 },
-
-      { header: 'Plate No ', key: 'plateNo', width: 15 },
-      { header: 'Renewal Date', key: 'RenewalDate', width: 15 },
-      { header: 'Auth Code', key: 'AuthCode', width: 15 },
-
-      { header: 'Amount', key: 'amount', width: 15 },
-      { header: 'Amount Recieved', key: 'amountRecieved', width: 15 },
-      { header: 'Balance', key: 'balance', width: 15 },
-
-      { header: 'Cleaner', key: 'cleaner', width: 15 },
-      { header: 'Site ', key: 'site', width: 15 },
-      { header: 'Payment methord ', key: 'PaymentMethord', width: 15 },
-
+     
     ];
   
-    data.forEach((item) => {
-        console.log(item,'ietmss');
-      worksheet.addRow({
-        contractNo: item.contractNo,
-        serialNo:item.serialNo,
-        plateNo: item.plateNo,
-        RenewalDate: item.newDate,
-        AuthCode:item.authCode,
-        amount: item.amount,
-        amountRecieved: item.amountRecieved,
-        balance: item.balance,
-
-        cleaner: item.cleaner,
-        site: item.site,
-        PaymentMethord : item.paymentMethod,
+    data.forEach((data) => {
+        console.log(data,'ietmss');
+        worksheet2.addRow({
+        contractNo: data.contractNo,
+        
 
       });
     });
@@ -203,7 +183,7 @@ async function exportToExcelAndSendResponse(data, res) {
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     res.setHeader('Content-Disposition', 'attachment; filename=output.xlsx');
   
-   await  workbook.xlsx.write(res);
+   await  workbook2.xlsx.write(res);
   
    
     res.end();
