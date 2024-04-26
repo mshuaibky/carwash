@@ -155,26 +155,43 @@ exports.downloadadminReneiwedData = async(req,res)=>{
         const allData =await RenewedList.find({})
         console.log(allData,';;;;;;');
         if(allData){
-            exportToExcelAndSendResponse(allData,res)
+            exportToExcelAndSendResponseadmin(allData,res)
         }
         
     } catch (error) {
         
     }
 }
-async function exportToExcelAndSendResponse(data, res) {
+async function exportToExcelAndSendResponseadmin(data, res) {
     console.log(data ,'download');
     const workbook2 = new ExcelJS2.Workbook();
-    const worksheet2 = workbook2.addWorksheet('Sheet 1');
+    const worksheet2 = workbook2.addWorksheet('Sheet 2');
     worksheet2.columns = [
+      { header: 'Serial No', key: 'serialNo', width: 15 },
       { header: 'Contract No', key: 'contractNo', width: 15 },
+      { header: 'Plate No', key: 'plateNo', width: 15 },
+      { header: 'Renewal Date', key: 'newDate', width: 15 },
+      { header: 'Amount', key: 'amount', width: 15 },
+      { header: 'Auth Code', key: 'authCode', width: 15 },
+      { header: 'Cleaner', key: 'cleaner', width: 15 },
+      { header: 'Site', key: 'site', width: 15 },
+
+
      
     ];
   
     data.forEach((data) => {
         console.log(data,'ietmss');
         worksheet2.addRow({
-        contractNo: data.contractNo,
+            serialNo: data.serialNo,
+            contractNo: data.contractNo,
+            plateNo: data.plateNo,
+            newDate: data.newDate,
+            amount: data.amount,
+            authCode: data.authCode,
+            cleaner: data.cleaner,
+            site: data.site,
+
         
 
       });
@@ -604,7 +621,7 @@ try {
         lotnumber: item.lotnumber,
         paymentMethod: item.paymentMethod,
 
-        authcode: item.authCode,
+        authcode: item.authcode,
         amount: item.amount,
         renewaldate : item.renewaldate,
         schedule : item.schedule,
