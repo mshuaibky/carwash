@@ -67,6 +67,9 @@ else if(!values.authcode&&values.paymentMethod==='card'){
 else if(!values.renewaldate){
   errors.renewaldate = toast.error('provide renewal date')
 }
+else if(!values.paymentMethod){
+  errors.paymentMethod = toast.error('please select payment methord')
+}
     return errors
   }
 
