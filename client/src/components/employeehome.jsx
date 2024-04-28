@@ -50,7 +50,7 @@ function EmployeeHome() {
     };
    
     const handleSearch =async()=>{
-      const searchData =await search(searchTerm )
+      const searchData =await search(searchTerm,emp )
       console.log(searchData,'dkfj');
       setList(searchData.data)
 

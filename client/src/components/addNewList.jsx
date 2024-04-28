@@ -67,10 +67,7 @@ else if(!values.authcode&&values.paymentMethod==='card'){
 else if(!values.renewaldate){
   errors.renewaldate = toast.error('provide renewal date')
 }
-else if(!values.paymentMethod){
-  errors.paymentMethod = toast.error('please select payment methord')
-}
-    return errors
+  return errors
   }
 
   const today = new Date();
@@ -108,6 +105,7 @@ else if(!values.paymentMethod){
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async values => {
+      console.log(values,'formik values');
       values.site = values.site.toUpperCase();
 
       const selectedDays = document.querySelectorAll('input[name="day"]:checked');

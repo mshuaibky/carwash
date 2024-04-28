@@ -104,6 +104,9 @@ function EmployeeEdit() {
     else if (!values.newDate) {
       errors.newDate = toast.error('provide renewal date')
     }
+    // else if (!values.Payment){
+    //   errors.Payment = toast.error('Invalid Payment methord')
+    // }
    
     return errors
   }
@@ -125,6 +128,7 @@ function EmployeeEdit() {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async values => {
+      console.log('fjkjfkjf');
       console.log(values, 'formik values');
       const datas = { values, id }
       console.log(datas);

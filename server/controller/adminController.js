@@ -401,14 +401,19 @@ exports.loginAdmin=async(req,res)=>{
  }
  //seerch data
  exports.getSearchData =async(req,res)=>{
-    const data = req.body
- 
-    const contact = Object.keys(data)[0];
-
+    console.log(req.body,'bodyyyy');
+    const data = req?.body?.data
+    const empData = req?.body?.emp
+    // const contact = Object.keys(data)[0];
+    
     try {
-        console.log(contact,'backend');
-    const Data =await PendingList.find({contractNo:contact})
-    console.log(Data,'dddk');
+        console.log(data,'backend');
+        const site = await Employee.find({name:empData})
+        console.log(site,'kdlkdj');
+    const empSite = site[0]?.site
+ console.log(empSite,'site..');
+    const Data =await PendingList.find({contractNo:data , site:empSite})
+   console.log(Data,'namma data,lll');
     if(Data){
         res.status(200).send(Data)
     }

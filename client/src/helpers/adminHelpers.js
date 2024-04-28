@@ -188,9 +188,10 @@ export async function getEmplPendingList(currentPage, pageSize,data) {
   }
 //search
 
-export async function search(data){
+export async function search(data,emp){
+    const datas = {data,emp}
    return new Promise((resolve,reject)=>{
-    adminApi.post('/searchTerm',data).then((response)=>{
+    adminApi.post('/searchTerm',datas).then((response)=>{
         if(response){
 resolve(response)
         }
