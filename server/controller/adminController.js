@@ -171,7 +171,8 @@ async function exportToExcelAndSendResponseadmin(data, res) {
       { header: 'Contract No', key: 'contractNo', width: 15 },
       { header: 'Plate No', key: 'plateNo', width: 15 },
       { header: 'Renewal Date', key: 'newDate', width: 15 },
-      { header: 'Amount', key: 'amount', width: 15 },
+      { header: 'Amount Recieved', key: 'amountRecieved', width: 15 },
+
       { header: 'Auth Code', key: 'authCode', width: 15 },
       { header: 'Cleaner', key: 'cleaner', width: 15 },
       { header: 'Site', key: 'site', width: 15 },
@@ -187,7 +188,7 @@ async function exportToExcelAndSendResponseadmin(data, res) {
             contractNo: data.contractNo,
             plateNo: data.plateNo,
             newDate: data.newDate,
-            amount: data.amount,
+            amountRecieved:data.amountRecieved,
             authCode: data.authCode,
             cleaner: data.cleaner,
             site: data.site,
