@@ -348,12 +348,9 @@ exports.loginAdmin=async(req,res)=>{
         console.log(emp,'emp');
         if(emp.length!==0){
 
-            console.log(emp[0].password,'emp');
-            console.log('kfdlkjdkl');
             const validateEmp=await bcrypt.compare(password,emp[0]?.password)
             console.log(validateEmp,'kkj');
                 if(validateEmp){
-                    console.log('kayaa');
                     const update= await Employee.updateOne({name:username},
                         {
                             $set:{
@@ -363,7 +360,7 @@ exports.loginAdmin=async(req,res)=>{
                        
                     }
                  console.log(emp[0].name);
-                    res.status(200).send({data:emp[0]?.name})
+                    res.status(200).send({data:emp[0]?.name,site:emp[0].site})
 
         }
 

@@ -5,6 +5,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
 function AddNewList() {
+  const defaultSite = sessionStorage.getItem('site');
   const todayDate = new Date().toISOString().split('T')[0]
   const Navigate = useNavigate()
   const [selectedValue, setSelectedValue] = useState('cash');
@@ -97,7 +98,7 @@ else if(!values.renewaldate){
       renewaldate: '',
       schedule: '',
       cleaner: '',
-      site: '',
+      site:defaultSite,
       date: formattedDate,
       instanceid: ''
     },
@@ -368,12 +369,13 @@ else if(!values.renewaldate){
                       name='site'
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.site}
+                      value={defaultSite}
                       className="w-full rounded-lg border border-gray-500 p-3 text-sm "
                 
-                      placeholder="Cleaner Name "
+                      placeholder="Site "
                       type="text"
                       id="phone"
+                      readOnly
                     />
                   </div>
                   <div>
@@ -385,7 +387,7 @@ else if(!values.renewaldate){
                       value={formik.values.date}
                       className="w-full rounded-lg border border-gray-500 p-3 text-sm"
 
-                      placeholder="Cleaner Name "
+                      placeholder="Date "
                       type="text"
                       id="phone"
                     />

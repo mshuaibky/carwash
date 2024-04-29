@@ -40,7 +40,9 @@ function EmployeeLogin() {
             console.log(data,'data of admin');
             if(data){
                 sessionStorage.clear()
-                sessionStorage.setItem('emp',data?.data?.data );
+                sessionStorage.setItem('emp',data?.data?.data )
+                sessionStorage.setItem('site',data?.data?.site );
+                
                 navigate('/employee')
             }
             
