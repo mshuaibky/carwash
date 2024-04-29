@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import{useNavigate,Link} from 'react-router-dom'
-import{getAdminNewList,downloadAdminNewListData} from '../helpers/adminHelpers'
+import{getAdminNewList,downloadAdminNewListData,deleteNewList} from '../helpers/adminHelpers'
 
 function AdminNewList() {
+  console.log('hai');
     const [adminList,setAdminList] = useState([])
     useEffect(()=>{
       getAdminNewList().then((Data)=>{
@@ -26,6 +27,15 @@ function AdminNewList() {
               className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
             >
              Download
+            </Link>
+          </div>
+          <div>
+            <Link 
+            onClick={deleteNewList}
+              type="button"
+              className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >
+             Delete
             </Link>
           </div>
     </div>

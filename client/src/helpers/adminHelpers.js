@@ -295,3 +295,17 @@ export async function downloadAdminNewListData(){
         })
     })
 }
+//delete all new list
+export async function deleteNewList(){
+    try {
+       return new Promise((resolve,reject)=>{
+        adminApi.get('/deleteNewList').then((data)=>{
+            resolve(data)
+        }).catch((error)=>{
+            reject(error)
+        })
+       })
+    } catch (error) {
+        
+    }
+}

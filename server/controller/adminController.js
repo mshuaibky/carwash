@@ -35,6 +35,7 @@ const addlist = new PendingList ({
 })
 addlist.save().then((result)=>{
     if(result){
+        
         res.status(200).send({ success: "added" });
     }else{
         res.status(500).send({error:error.message})
@@ -650,4 +651,16 @@ try {
     
   
     console.log('Excel file sent successfully');
+ }
+ //Delete New List 
+
+ exports.newListDelete=async(req,res)=>{
+    try {
+        const data = await NewList.deleteMany({})
+        if(data){
+            console.log(data,'data');
+        }
+    } catch (error) {
+        
+    }
  }
