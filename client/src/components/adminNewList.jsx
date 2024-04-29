@@ -29,7 +29,7 @@ function AdminNewList() {
              Download
             </Link>
           </div>
-          <div>
+          {/* <div>
             <Link 
             onClick={deleteNewList}
               type="button"
@@ -37,7 +37,7 @@ function AdminNewList() {
             >
              Delete
             </Link>
-          </div>
+          </div> */}
     </div>
     <div className="mt-6 flex flex-col">
       <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
