@@ -216,7 +216,7 @@ async function exportToExcelAndSendResponseadmin(data, res) {
 
   exports.exportFormData = async (req, res) => {
     try {
-        console.log('calling ');
+        // console.log(req,'calling ');
    
      if(req.file.buffer){
         const result = await PendingList.deleteMany({});
@@ -239,12 +239,15 @@ async function exportToExcelAndSendResponseadmin(data, res) {
             if (rowNumber === 1) {
                 return;
             }
+            // const contractNo = JSON.stringify(row.getCell(1).value);
+         const plateNoString = JSON.stringify(row.getCell(4).value);
+
 
             const rowData = {
                 contractNo: row.getCell(1).value === 'CONTRACT NO' ? '' : row.getCell(1).value,
                 mobile: row.getCell(2).value === 'MOBILE ' ? '' : row.getCell(2).value,
                 building: row.getCell(3).value === 'BUILDING ' ? '' : row.getCell(3).value,
-                plateNo: row.getCell(4).value === 'PLATE NO ' ? '' : row.getCell(4).value,
+                plateNo: row.getCell(4).value === 'PLATE NO ' ? '' : plateNoString,
                 flatNo: row.getCell(5).value === 'FLAT NO ' ? '' : row.getCell(5).value,
                 VAT: row.getCell(7).value === 'RATE OF MONTHLY CONTRACT INCLUDE VAT' ? '' : row.getCell(7).value,
                 renewalDate: row.getCell(8).value === 'RENEWAL DATE' ? '' : row.getCell(8).value,
