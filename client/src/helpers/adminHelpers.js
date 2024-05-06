@@ -304,7 +304,22 @@ export async function deleteNewList(){
         }).catch((error)=>{
             reject(error)
         })
+       }) 
+    } catch (error) {
+        
+    }
+}
+//getting renewed list for employees
+export async function getrenewedListEmployee(data){
+    try {
+        return new Promise((resolve,reject)=>{
+       adminApi.post('/getrenewedListEmployee',{data:data}).then((data)=>{
+        console.log(data,'frontend');
+        resolve(data)
+       }).catch((error)=>{
+        reject(error)
        })
+        })
     } catch (error) {
         
     }

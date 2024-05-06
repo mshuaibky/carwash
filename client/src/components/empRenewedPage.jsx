@@ -1,14 +1,16 @@
 import React,{useState,useEffect} from 'react'
-import{getrenewedList} from '../helpers/adminHelpers'
+import{getrenewedListEmployee} from '../helpers/adminHelpers'
 import { Link } from 'react-router-dom'
 
 function EmpRenewedPage() {
+  const site = sessionStorage.getItem('site');
+  console.log(site,'site');
     const [renewedList,setRenewedData]= useState([])
 
     useEffect(()=>{
-      getrenewedList().then((data)=>{
+      getrenewedListEmployee(site).then((data)=>{
         console.log(data,'renewed data');
-        setRenewedData(data?.data?.data)
+        setRenewedData(data?.data)
       })
     },[])
   return (

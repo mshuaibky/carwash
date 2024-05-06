@@ -664,3 +664,18 @@ try {
         
     }
  }
+ //get employee renewed list for one site
+ exports.getEmployeerenewedList = async (req,res)=>{
+    try {
+        console.log(req.body,'data body');
+        const EmpSite = req.body.data
+        console.log(EmpSite,'backend');
+      const data = await RenewedList.find({site:EmpSite})
+      console.log(data,'data...');
+      if(data){
+        res.status(200).send(data)
+      }
+    } catch (error) {
+        
+    }
+ }
