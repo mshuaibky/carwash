@@ -154,7 +154,7 @@ exports.getallRenewedList= async(req,res)=>{
 exports.downloadadminReneiwedData = async(req,res)=>{
     try {
         const allData =await RenewedList.find({})
-        console.log(allData,';;;;;;');
+        console.log(allData,'dagta');
         if(allData){
             exportToExcelAndSendResponseadmin(allData,res)
         }
@@ -175,6 +175,8 @@ async function exportToExcelAndSendResponseadmin(data, res) {
       { header: 'Amount Recieved', key: 'amountRecieved', width: 15 },
 
       { header: 'Auth Code', key: 'authCode', width: 15 },
+      { header: 'payment Method', key: 'paymentMethod', width: 15 },
+
       { header: 'Cleaner', key: 'cleaner', width: 15 },
       { header: 'Site', key: 'site', width: 15 },
 
@@ -191,6 +193,7 @@ async function exportToExcelAndSendResponseadmin(data, res) {
             newDate: data.newDate,
             amountRecieved:data.amountRecieved,
             authCode: data.authCode,
+            paymentMethod:data.paymentMethod,
             cleaner: data.cleaner,
             site: data.site,
 
