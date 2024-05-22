@@ -23,12 +23,12 @@ function AddNewList() {
     else if (!values.name) {
       errors.name = toast.error('name is required')
     }
-    else if (!values.mobile) {
-      errors.mobile = toast.error('Mobile is required')
-    }
-    else if (!values.mobile.match(/^\d+/)) {
-      errors.mobile = toast.error('Enter a valid number')
-    }
+    // else if (!values.mobile) {
+    //   errors.mobile = toast.error('Mobile is required')
+    // }
+    // else if (!values.mobile.match(/^\d+/)) {
+    //   errors.mobile = toast.error('Enter a valid number')
+    // }
 
     //building
     else if (!values.building) {
@@ -41,9 +41,9 @@ function AddNewList() {
     }
     
     //flat
-    else if (!values.flat.match(/^\d+/)) {
-      errors.flat = toast.error('Flat no is required')
-    }
+    // else if (!values.flat.match(/^\d+/)) {
+    //   errors.flat = toast.error('Flat no is required')
+    // }
 
    
     //lot number
