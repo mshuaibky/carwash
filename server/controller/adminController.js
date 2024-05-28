@@ -244,7 +244,7 @@ async function exportToExcelAndSendResponseadmin(data, res) {
             }
             // const contractNo = JSON.stringify(row.getCell(1).value);
          const plateNoString = JSON.stringify(row.getCell(4).value);
-
+         const VatValue = JSON.stringify(row.getCell(7).value);
 
             const rowData = {
                 contractNo: row.getCell(1).value === 'CONTRACT NO' ? '' : row.getCell(1).value,
@@ -252,7 +252,7 @@ async function exportToExcelAndSendResponseadmin(data, res) {
                 building: row.getCell(3).value === 'BUILDING ' ? '' : row.getCell(3).value,
                 plateNo: row.getCell(4).value === 'PLATE NO ' ? '' : plateNoString,
                 flatNo: row.getCell(5).value === 'FLAT NO ' ? '' : row.getCell(5).value,
-                VAT: row.getCell(7).value === 'RATE OF MONTHLY CONTRACT INCLUDE VAT' ? '' : row.getCell(7).value,
+                VAT: row.getCell(7).value === 'RATE OF MONTHLY CONTRACT INCLUDE VAT' ? '' : VatValue,
                 renewalDate: row.getCell(8).value === 'RENEWAL DATE' ? '' : row.getCell(8).value,
                 status: row.getCell(15).value === 'CONTRACT STATUS' ? '' : row.getCell(15).value,
                 cleaner: row.getCell(17).value === 'CLEANER NOW' ? '' : row.getCell(17).value,
