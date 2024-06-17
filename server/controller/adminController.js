@@ -185,7 +185,6 @@ async function exportToExcelAndSendResponseadmin(data, res) {
     ];
   
     data.forEach((data) => {
-        console.log(data,'ietmss');
         worksheet2.addRow({
             serialNo: data.serialNo,
             contractNo: data.contractNo,
@@ -490,7 +489,7 @@ try {
    res.send(error) 
 }
  }
- //download new List data
+//  download new List data
  exports.downloadDataNewList = async (req,res)=>{
     try {
         const allData =await NewList.find({})
@@ -501,77 +500,75 @@ try {
         
     }
  }
- async function exportToExcelAndSendResponse(data, res) {
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Sheet 1');
-    worksheet.columns = [
-      { header: 'Serial No', key: 'serialNo', width: 15 },
-      { header: 'Name', key: 'name', width: 15 },
+//  async function exportToExcelAndSendResponse(data, res) {
+//     const workbook = new ExcelJS.Workbook();
+//     const worksheet = workbook.addWorksheet('Sheet 1');
+//     worksheet.columns = [
+//       { header: 'Serial No', key: 'serialNo', width: 15 },
+//       { header: 'Name', key: 'name', width: 15 },
 
-      { header: 'Mobile ', key: 'mobile', width: 15 },
-      { header: 'Building', key: 'building', width: 15 },
-      { header: 'Plate No', key: 'PlateNo', width: 15 },
+//       { header: 'Mobile ', key: 'mobile', width: 15 },
+//       { header: 'Building', key: 'building', width: 15 },
+//       { header: 'Plate No', key: 'PlateNo', width: 15 },
 
-      { header: 'Flat  ', key: 'flat', width: 15 },
-      { header: 'Lot Number', key: 'lotnumber', width: 15 },
-      { header: 'payment Method', key: 'paymentMethod', width: 15 },
+//       { header: 'Flat  ', key: 'flat', width: 15 },
+//       { header: 'Lot Number', key: 'lotnumber', width: 15 },
+//       { header: 'payment Method', key: 'paymentMethod', width: 15 },
 
-      { header: 'AuthCode', key: 'authcode', width: 15 },
-      { header: 'Amount ', key: 'amount', width: 15 },
-      { header: 'Renewal Date ', key: 'renewaldate', width: 15 },
-      { header: 'Schedule ', key: 'schedule', width: 16 },
-      { header: 'Cleaner ', key: 'cleaner', width: 17 },
-      { header: 'Site ', key: 'site', width: 17 },
+//       { header: 'AuthCode', key: 'authcode', width: 15 },
+//       { header: 'Amount ', key: 'amount', width: 15 },
+//       { header: 'Renewal Date ', key: 'renewaldate', width: 15 },
+//       { header: 'Schedule ', key: 'schedule', width: 16 },
+//       { header: 'Cleaner ', key: 'cleaner', width: 17 },
+//       { header: 'Site ', key: 'site', width: 17 },
 
-      { header: 'Date ', key: 'date', width: 18 },
-
-
+//       { header: 'Date ', key: 'date', width: 18 },
 
 
-    ];
+
+
+//     ];
   
-    data.forEach((item) => {
-        console.log(item,'ietmss');
-      worksheet.addRow({
-        serialNo: item.serialNo,
-        name:item.name,
-        mobile: item.mobile,
-        building: item.building,
-        PlateNo:item.plateNo,
-        flat: item.flat,
-        lotnumber: item.lotnumber,
-        paymentMethod: item.paymentMethod,
+//     data?.forEach((item) => {
+//       worksheet.addRow({
+//         serialNo: item.serialNo,
+//         name:item.name,
+//         mobile: item.mobile,
+//         building: item.building,
+//         PlateNo:item.plateNo,
+//         flat: item.flat,
+//         lotnumber: item.lotnumber,
+//         paymentMethod: item.paymentMethod,
 
-        authcode: item.authCode,
-        amount: item.amount,
-        renewaldate : item.renewaldate,
-        schedule : item.schedule,
-        cleaner : item.cleaner,
-        site : item.site,
-        date : item.date,
-
+//         authcode: item.authCode,
+//         amount: item.amount,
+//         renewaldate : item.renewaldate,
+//         schedule : item.schedule,
+//         cleaner : item.cleaner,
+//         site : item.site,
+//         date : item.date,
 
 
-      });
-    });
+
+//       });
+//     });
   
-    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    res.setHeader('Content-Disposition', 'attachment; filename=output.xlsx');
+//     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+//     res.setHeader('Content-Disposition', 'attachment; filename=output.xlsx');
   
-   await  workbook.xlsx.write(res);
+//    await  workbook.xlsx.write(res);
   
    
-    res.end();
+//     res.end();
     
   
-    console.log('Excel file sent successfully');
-  }
+//     console.log('Excel file sent successfully');
+//   }
   
   //get admin list
  exports.getAdminList =async(req,res)=>{
     try {
         const data = await NewList.find({})
-        console.log(data,'new lsit data');
         if(data){
             res.status(200).send(data)
         }
@@ -582,10 +579,24 @@ try {
 
  exports.dwnldAdminList = async(req,res)=>{
     try {
+        const date = req.params?.data
+        console.log(date,'date');
+       if(date){
+
+           const allData =await NewList.find({date:date})
+           console.log(allData,'data...');
+           if(allData){
+               exportToExcelAndSendResponse(allData,res)
+           }
+       }
+       else{
+        console.log('else..');
         const allData =await NewList.find({})
+        console.log(allData,'kfjj');
         if(allData){
             exportToExcelAndSendResponse(allData,res)
         }
+       }
     } catch (error) {
         
     }
@@ -619,8 +630,7 @@ try {
 
     ];
   
-    data.forEach((item) => {
-        console.log(item,'ietmss');
+    data?.forEach((item) => {
       worksheet.addRow({
         serialNo: item.serialNo,
         name:item.name,
@@ -678,6 +688,20 @@ try {
       if(data){
         res.status(200).send(data)
       }
+    } catch (error) {
+        
+    }
+ }
+
+ exports.newListSearch = async (req,res)=>{
+    try {
+       
+       console.log(req.body,'nammaaan');
+       const data = req.body.data
+     const datas = await NewList.find({date:data})
+     
+        res.status(200).send(datas)
+     
     } catch (error) {
         
     }

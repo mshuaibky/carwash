@@ -1,16 +1,54 @@
 import React, { useEffect, useState } from 'react'
 import{useNavigate,Link} from 'react-router-dom'
-import{getAdminNewList,downloadAdminNewListData,deleteNewList} from '../helpers/adminHelpers'
+import{getAdminNewList,downloadAdminNewListData,deleteNewList,newListSearch} from '../helpers/adminHelpers'
 
 function AdminNewList() {
   console.log('hai');
+  const [searchTerm, setSearchTerm] = useState('');
     const [adminList,setAdminList] = useState([])
+
     useEffect(()=>{
-      getAdminNewList().then((Data)=>{
-        setAdminList(Data?.data)
-        console.log(Data,'frontEnd');
-      })
-    },[])
+   if(searchTerm == ''){
+
+     getAdminNewList().then((Data)=>{
+       setAdminList(Data?.data)
+       console.log(Data,'frontEnd');
+     })
+   }
+    },[searchTerm])
+
+   
+    function convertDateFormat(dateStr) {
+      // Split the input date string by the hyphen
+      const [year, month, day] = dateStr.split('-');
+      // Return the date in the desired format
+      return `${day}-${month}-${year}`;
+  }
+//searching with date
+    const handleSearch =async()=>{
+      const data = convertDateFormat(searchTerm)
+      console.log(data,'data..front');
+      if(searchTerm!=''){
+
+        const searchData =await newListSearch({data:data} )
+        console.log(searchData,'dkfj');
+        setAdminList(searchData.data)  
+      }
+
+    }
+//
+const download =async()=>{
+  let data ;
+   if(searchTerm){
+     
+      data = convertDateFormat(searchTerm)
+   }
+
+else data = searchTerm
+ await downloadAdminNewListData(data)
+}
+
+
   return (
     <div>
          <div>
@@ -20,9 +58,25 @@ function AdminNewList() {
         <h2 className="text-lg font-semibold">Admin New List</h2>
        
       </div>
+      <div className="flex items-center">
+  <input
+    type="date"
+   
+    onChange={(e) => setSearchTerm(e.target.value)}
+    placeholder="Search by Contract No"
+    className="border border-gray-300 rounded-lg px-3 py-1 mr-2"
+  />
+  <button
+    onClick={handleSearch}
+    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+  >
+    Search
+  </button>
+</div>
       <div>
+
             <Link 
-            onClick={downloadAdminNewListData}
+            onClick={download}
               type="button"
               className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
             >

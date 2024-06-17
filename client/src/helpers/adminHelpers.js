@@ -270,29 +270,57 @@ export async function getAdminNewList(){
     })
 }
 
-export async function downloadAdminNewListData(){
+export async function downloadAdminNewListData(searchData){
     return new Promise((resolve,reject)=>{
-        adminApi.get('/dwnloadAdminNewList', { responseType: 'arraybuffer' }).then((data,response)=>{
-            console.log(data,'dlfjlkdj');
-            if(data){
+        console.log(searchData);
+        if(searchData){
 
-                const blob = new Blob([data.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-
-                // Create a link element to trigger the download
-                const link = document.createElement('a');
-                
-                link.href = window.URL.createObjectURL(blob);
-                link.download = 'renewed_data.xlsx'; // Set the desired file name
-                link.click();
+            adminApi.get(`/dwnloadAdminNewList/${searchData}`,{ responseType: 'arraybuffer' }).then((data,response)=>{
+                console.log(data,'dlfjlkdj');
+                if(data){
+    
+                    const blob = new Blob([data.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    
+                    // Create a link element to trigger the download
+                    const link = document.createElement('a');
+                    
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = 'newList.xlsx'; // Set the desired file name
+                    link.click();
+                  
+                }
+                else {
+                    console.error('Failed to download data:', response.statusText)
+                  }
               
-            }
-            else {
-                console.error('Failed to download data:', response.statusText);
-              }
-          
-        }).catch((error)=>{
-            reject(error)
-        })
+            }).catch((error)=>{
+                reject(error)
+            })
+        }else{
+
+            adminApi.get(`/dwnloadAdminNewList/`,{ responseType: 'arraybuffer' }).then((data,response)=>{
+                console.log(data,'dlfjlkdj');
+                if(data){
+    
+                    const blob = new Blob([data.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    
+                    // Create a link element to trigger the download
+                    const link = document.createElement('a');
+                    
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = 'newList.xlsx'; // Set the desired file name
+                    link.click();
+                  
+                }
+                else {
+                    console.error('Failed to download data:', response.statusText);
+                  }
+              
+            }).catch((error)=>{
+                reject(error)
+            })
+        }
+
     })
 }
 //delete all new list
@@ -323,4 +351,17 @@ export async function getrenewedListEmployee(data){
     } catch (error) {
         
     }
+}
+
+export async function newListSearch(data){
+   return new Promise((resolve,reject)=>{
+    adminApi.post('/newListSearchData',data).then((response)=>{
+        if(response){
+resolve(response)
+        }
+    }).catch((error)=>{
+        reject(error)
+    })
+   })
+
 }

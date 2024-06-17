@@ -23,7 +23,8 @@ const {addPendingList,getAllLists
     getAdminList,
     dwnldAdminList,
     newListDelete,
-    getEmployeerenewedList
+    getEmployeerenewedList,
+    newListSearch
 } = require('../controller/adminController')
 
 router.post('/pendingList',addPendingList)
@@ -43,7 +44,9 @@ router.post('/newList',addNewList)
 router.get('/newListData',getNewListData)
 router.get('/downloadNewListData',downloadDataNewList)
 router.get('/getadminNewList',getAdminList)
-router.get('/dwnloadAdminNewList',dwnldAdminList)
+router.get('/dwnloadAdminNewList/:data?',dwnldAdminList)
 router.get('/deleteNewList',newListDelete)
 router.post('/getrenewedListEmployee',getEmployeerenewedList)
+router.post('/newListSearchData',newListSearch)
+
 module.exports= router
